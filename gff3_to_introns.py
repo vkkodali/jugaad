@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import csv
 import os
@@ -51,10 +51,12 @@ def get_exons(gff3_file):
             if (feat_type == "exon"
                 and 'transcript_id=' in attribs):
                 new_attribs = process_attribs(attribs)
-                if 'GeneID' in new_attribs:
+                if 'GeneID' in new_attribs: ## RefSeq AR GFF3s
                     gene_id = new_attribs['GeneID']
-                else:
+                elif 'gene' in new_attribs: ## Gnomon GFF3s
                     gene_id = new_attribs['gene']
+                elif 'gene_id' in new_attribs: ## GENCODE GFF3s
+                    gene_id = new_attribs['gene_id']
                 tx = new_attribs['transcript_id']
                 start, stop = int(start), int(stop)
                 exons_dict[(chrom, strand, gene_id, tx)].append((start, stop))
