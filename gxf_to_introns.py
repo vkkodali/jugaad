@@ -37,7 +37,7 @@ def create_db(gxfin):
                 force=True,
                 disable_infer_genes=True,
                 disable_infer_transcripts=True) 
-    return db
+    return db, dbfilename
 
 def add_introns(db):
     db.update(db.create_introns())
@@ -64,6 +64,8 @@ def tabulate_splice_structures(fo, d):
                     introns[i][j] = str(introns[i][j])
         introns = ['|'.join(i) for i in introns]
         tbl.writerow(txinfo + [','.join(introns)])
+    
+    fo.close()
 
 ## parse arguments
 args = parse_args()
@@ -76,7 +78,7 @@ else:
 # create db
 print('{} Creating database from the input file...' 
     .format(currtime()), file=sys.stderr)
-db = create_db(gxfin)
+db, dbfile = create_db(gxfin)
 
 # compute intron features and update db
 print('{} Computing introns...' 
@@ -93,3 +95,10 @@ print('{} Writing output to file...'
     .format(currtime()), file=sys.stderr)
 tabulate_splice_structures(fo, int_feats)
 
+# delete db file
+print('{} Deleting temporary db file...' 
+    .format(currtime()), file=sys.stderr)
+try:
+    os.remove(dbfile)
+except OSError as e:  ## if failed, report it back to the user ##
+    print ("Error: %s - %s." % (e.filename, e.strerror))
