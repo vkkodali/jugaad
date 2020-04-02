@@ -93,6 +93,10 @@ def process_attribs(attribs, delim):
             for xref in xrefs:
                 k, v = xref.split(':', 1)
                 attrib_dict[k] = v 
+        elif k in attrib_dict:
+            if isinstance(attrib_dict[k], str):
+                attrib_dict[k] = [attrib_dict[k]]
+            attrib_dict[k].append(v)
         else:
             attrib_dict[k] = v
     return attrib_dict
