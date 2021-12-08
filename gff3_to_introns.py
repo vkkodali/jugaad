@@ -13,6 +13,9 @@ import argparse
 from signal import signal, SIGPIPE, SIG_DFL
 signal(SIGPIPE, SIG_DFL)
 
+# reset CSV field size limit from 131072 to 1B
+csv.field_size_limit(10000000)
+
 def parse_args():
     desc_text = ("This script parses input gff3/gtf file and generates a table "
         "of introns")
