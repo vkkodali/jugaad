@@ -24,10 +24,10 @@ def parse_args():
                         action='store_true')
     parser.add_argument('-f', '--format', help="input file type",
                         choices=['gtf', 'gff3'], required=True)
-    parser.add_argument('--tx_attrib', help="attribute to use for transcript id",
-                        default='transcript_id')
-    parser.add_argument('--gene_attrib', help="attribute to use for gene id",
-                        default='GeneID')
+    parser.add_argument('--tx_attrib', help="attribute to use for transcript \
+                        id; default is `transcript_id`", default='transcript_id')
+    parser.add_argument('--gene_attrib', help="attribute to use for gene id; \
+                        default is `GeneID`", default='GeneID')
     parser.add_argument('--splice_structures', help="write splice structures \
                         instead of introns to output file", action='store_true')
 
