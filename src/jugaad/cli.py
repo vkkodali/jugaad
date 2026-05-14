@@ -8,7 +8,7 @@ import sys
 from collections.abc import Sequence
 
 from jugaad import __version__
-from jugaad.commands import gff3_to_introns
+from jugaad.commands import find_retained_introns, gff3_to_introns
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -23,6 +23,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     subparsers = parser.add_subparsers(dest="command", metavar="<command>")
+    find_retained_introns.register_parser(subparsers)
     gff3_to_introns.register_parser(subparsers)
     return parser
 

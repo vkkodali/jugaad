@@ -7,7 +7,7 @@ import sys
 import pytest
 
 from jugaad.cli import main as cli_main
-from jugaad.commands.gff3_to_introns import process_attribs
+from jugaad.parse_gxf_annots import process_attribs
 
 
 GFF3_PARENT_DATA = """##gff-version 3

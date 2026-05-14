@@ -31,6 +31,16 @@ uv run jugaad --help
 uv run jugaad gff3_to_introns --help
 uv run jugaad gff3_to_introns -f gff3 -i input.gff3 -o introns.tsv
 uv run jugaad gff3_to_introns -f gtf --splice_structures < input.gtf
+uv run jugaad find_retained_introns --help
+uv run jugaad find_retained_introns -f gff3 -i input.gff3 -o retained_introns.tsv
+uv run jugaad find_retained_introns -f gtf < input.gtf
+```
+
+`find_retained_introns` writes transcript/GeneID pairs:
+
+```text
+#transcript_id	gene_id
+TX2	GENE1
 ```
 
 Run checks:
